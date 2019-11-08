@@ -1,22 +1,23 @@
 import React from 'react'
 
-class Test extends React.Component {
+class AdminPage extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            started: false,
-            ended: false
+
         }
     }
+
+    
 
     render() {
         return(
             <div>
-                {this.state.started}
+                
             </div>
         )
     }
 
 }
 
-export default Test
+export default AdminPage
