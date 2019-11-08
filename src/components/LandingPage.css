@@ -30,3 +30,7 @@ button {
     font-size: 16px;
     padding: 4px 24px;
 }
+
+img {
+    max-width: 500px;
+}

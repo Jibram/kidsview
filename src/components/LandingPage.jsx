@@ -3,14 +3,18 @@ import logo from './assets/logo.png'
 import './LandingPage.css'
 
 class LandingPage extends React.Component {
+    constructor(props){
+        super(props)
+    }
+
     render() {
         return(
             <div className='flex'>
                 <img src={logo} alt="Children's valley hospital" height='100%' width='100%'/>
                 <h1>Telemedicine Eye Exam</h1>
-                <button type='button'>Patient</button>
+                <button type='button' onClick={this.props.handlePatient}>Patient</button>
                 <div className='separator'>OR</div>
-                <button type='button'>Doctor</button>
+                <button type='button' onClick={this.props.handleDoctor}>Doctor</button>
             </div>
         )
     }
