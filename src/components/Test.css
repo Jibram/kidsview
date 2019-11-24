@@ -10,5 +10,22 @@
 
 .info {
     width:60%;
-    text-align: left;
+    text-align: center;
+}
+
+form {
+    display: table;
+}
+
+p {
+    display: table-row;
+}
+label {
+    display: table-cell;
+}
+
+input {
+    display: table-cell;
+    padding: 3px;
+    margin: 3px;
 }

@@ -7,22 +7,60 @@ class Test extends React.Component {
         super(props)
         this.state = {
             started: false,
-            ended: false
+            ended: false,
+            userData: {
+                name: ``,
+                parent: ``,
+                phoneNum: 0,
+                aeData: 0,
+                meData: ``
+            }
         }
-        this.handleBegin = this.handleBegin.bind(this)
-        this.handleEnd = this.handleEnd.bind(this)
-        this.handleRestart = this.handleRestart.bind(this)
     }
 
-    handleBegin(e) {
-        this.setState({started:true});
+    componentDidUpdate () {
+        console.log(JSON.stringify(this.state.userData));
     }
 
-    handleEnd(e) {
+    handleNameChange = (e) => {
+        var userData = {...this.state.userData};
+        userData.name = e.target.value;
+        this.setState({userData});
+    }
+
+    handleParentChange = (e) => {
+        var userData = {...this.state.userData};
+        userData.parent = e.target.value;
+        this.setState({userData});
+    }
+
+    handlePhoneChange = (e) => {
+        var userData = {...this.state.userData};
+        userData.phoneNum = e.target.value;
+        this.setState({userData});
+    }
+
+    handleAEDataChange = (e) => {
+        var userData = {...this.state.userData};
+        userData.aeData = 0; /* THIS IS WHERE RAJ NEEDS TO DUMP HIS THINGS */
+        this.setState({userData});
+    }
+
+    handleMEDataChange = (e) => {
+        var userData = {...this.state.userData};
+        userData.meData = ""; /* THIS IS WHERE HOA NEEDS TO DUMP HIS THINGS*/
+        this.setState({userData});
+    }
+
+    handleBegin = (e) => {
+        this.setState({started:true}); 
+    }
+
+    handleEnd = (e) => {
         this.setState({ended:true});
     }
 
-    handleRestart(e) {
+    handleRestart = (e) => {
         this.setState({started:false, ended:false})
     }
 
@@ -57,6 +95,21 @@ class Test extends React.Component {
                     This exam will require the use of your camera. Please allow camera permissions when prompted by your web browser.<br/><br/>
                     This visual exam is not a conclusive medical examination as the information gathered here will be sent to a doctor for evaluation. 
                     </p>
+                    <form>
+                        <p>
+                            <label htmlFor="child">Child's Name:</label>
+                            <input required type="text" name="child" onChange={this.handleNameChange}></input>
+                        </p>
+                        <p>
+                            <label htmlFor="parent">Parent's Name:</label>
+                            <input required type="text" name="parent" onChange={this.handleParentChange}></input>
+                        </p>
+                        <p>
+                            <label htmlFor="phone">Phone Number:</label>
+                            <input required type="tel" name="phone" pattern="[0-9]{10}" onChange={this.handlePhoneChange}></input>
+                        </p>
+                    </form>
+                    <br/>
                     <button type='button' onClick={this.handleBegin}>Begin Exam</button>
                 </div>
             )

@@ -3,9 +3,7 @@ import logo from './assets/logo.png'
 import './LandingPage.css'
 
 class LandingPage extends React.Component {
-    constructor(props){
-        super(props)
-    }
+
 
     render() {
         return(
