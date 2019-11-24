@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from './assets/logo.png'
 import './Test.css'
+import VisualAcuity from './VisualAcuity'
 
 class Test extends React.Component {
     constructor(props){
@@ -18,6 +19,7 @@ class Test extends React.Component {
         }
     }
 
+<<<<<<< HEAD
     componentDidUpdate () {
         console.log(JSON.stringify(this.state.userData));
     }
@@ -56,6 +58,12 @@ class Test extends React.Component {
         this.setState({started:true}); 
     }
 
+=======
+    handleBegin = (e) => {
+        this.setState({started:true});
+    }
+
+>>>>>>> VisualAcuity
     handleEnd = (e) => {
         this.setState({ended:true});
     }
@@ -79,12 +87,7 @@ class Test extends React.Component {
             )
         }
         else if (this.state.started) {
-            return (
-                <div className='flex'>
-                    <p> This is a placeholder for our actual exam </p>
-                    <button type='button' onClick={this.handleEnd}>End Exam</button>
-                </div>
-            )
+            return <VisualAcuity handleRestart={this.handleRestart} handleEnd={this.handleEnd}/>
         }
         else {
             return (
