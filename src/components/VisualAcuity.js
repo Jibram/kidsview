@@ -6,35 +6,49 @@ class VisualAcuity extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            letter : 'e',
-            accuracy : 0,
+            letter : `E`,
             level : 0,
-            amount : 0,
+            accuracy : 0,
+            total : 0
         }
-        this.handleStartTest = this.handleStartTest.bind(this)
-        this.handleKeyCheck = this.handleKeyCheck.bind(this)
-        this.getRandomLetter = this.getRandomLetter.bind(this)
+
 
     }
 
-    handleStartTest(e) {
+    handleStartTest = (e) => {
         this.setState({level:1});
     }
 
-    handleKeyCheck(e){
-
-        
-        if (e.key == 1) {
-            this.setState({accuracy:this.state.accuracy+1});
+    handleKeyCheck = (e) => {
+        if (e.key == 'Enter') {
+            var userIn = document.getElementById('userCharIn');
+            if (userIn.value == this.state.letter) {
+                this.setState({accuracy:this.state.accuracy+1});
+            }
+            else {
+            }
+            this.setState({amount:this.state.total+1, letter:this.getRandomLetter()});
+            userIn.value = ''
         }
-
-        this.setState({amount:this.state.amount+1});
-        this.setState({letter:this.getRandomLetter()});
-        console.log(this.state.accuracy + ',' + this.state.amount);
+        console.log(this.state);
     }
 
-    getRandomLetter() {
-        return String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97);
+    getRandomLetter = () => {
+        return String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 65);
+    }
+
+    setStyle = () => {
+        switch (this.state.level) {
+            case 1: {
+                var level = document.getElementById('level'); 
+                level.style = 'levelOne'; 
+            }
+        }
+    }
+
+    handleEndVA = (e) => {
+        var level = this.state.level; 
+        return this.props.handleEnd;
     }
 
     viewSelect() {
@@ -48,6 +62,7 @@ class VisualAcuity extends React.Component {
                             This exam will test your visual accuracy by simulating a Snellen Eye Chart Exam.<br/><br/>
                             Please sit one foot away from the screen, and have the test proctor type 1 for correct letters.
                             </p>
+                            <div className='separator'/>
                             <button type='button' onClick={this.handleStartTest}>Begin Visual Acuity Exam</button>
                         </div>
                     )
@@ -55,13 +70,12 @@ class VisualAcuity extends React.Component {
                 case 1:
                     return (
                         <div className='flex'>
-                            <h2>{JSON.stringify(this.state.letter)}</h2>
-                            <input type="text" id="one" onKeyPress={this.handleKeyCheck}/>
-                            <button type='button' onClick={this.props.handleRestart}>Back to Beginning</button>
-                            <div className='separator'></div>
-                            <button type='button' onClick={this.props.handleEnd}>End Test</button>
+                            <h2>{this.state.letter}</h2>
+                            <input type="text" id="userCharIn" autoFocus="autoFocus" onKeyPress={this.handleKeyCheck}/>
+                            <button type='button' onClick={this.handleEndVA()}>End Test</button>
                         </div>
                     )
+
         }
     }
     

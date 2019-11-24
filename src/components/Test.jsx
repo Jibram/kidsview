@@ -10,20 +10,17 @@ class Test extends React.Component {
             started: false,
             ended: false
         }
-        this.handleBegin = this.handleBegin.bind(this)
-        this.handleEnd = this.handleEnd.bind(this)
-        this.handleRestart = this.handleRestart.bind(this)
     }
 
-    handleBegin(e) {
+    handleBegin = (e) => {
         this.setState({started:true});
     }
 
-    handleEnd(e) {
+    handleEnd = (e) => {
         this.setState({ended:true});
     }
 
-    handleRestart(e) {
+    handleRestart = (e) => {
         this.setState({started:false, ended:false})
     }
 
