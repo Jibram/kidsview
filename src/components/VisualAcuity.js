@@ -7,16 +7,19 @@ class VisualAcuity extends React.Component {
         super(props)
         this.state = {
             letter : `E`,
-            level : 0,
+            level : 1,
             accuracy : 0,
-            total : 0
+            total : 0,
+            fontSize :'14.7mm',
+            count : 0,
+            render : 0
         }
-
-
+        this.counter = 0;
     }
 
+
     handleStartTest = (e) => {
-        this.setState({level:1});
+        this.setState({render:1});
     }
 
     handleKeyCheck = (e) => {
@@ -24,35 +27,83 @@ class VisualAcuity extends React.Component {
             var userIn = document.getElementById('userCharIn');
             if (userIn.value == this.state.letter) {
                 this.setState({accuracy:this.state.accuracy+1});
+            } else {
+                this.handleEndVA();
             }
-            else {
+
+            if (this.counter == 4) {
+
+                if (this.state.level == 11) {
+                    this.handleEndVA();
+                }
+                this.setState({level:this.state.level+1})
+                this.counter = 0; 
+            } else {
+                this.counter++;
             }
-            this.setState({amount:this.state.total+1, letter:this.getRandomLetter()});
+            this.setState({total:this.state.total+1, letter:this.getRandomLetter(), fontSize:this.setFontSize()});
+        
             userIn.value = ''
         }
-        console.log(this.state);
+        //console.log(this.state);
+    }
+
+    setFontSize = () => {
+        switch (this.state.level) {
+            case 2: 
+                return '10mm'
+
+            case 3: 
+                return '9mm'
+            
+            case 4: 
+                return '8mm'
+
+            case 5: 
+                return '7mm'
+
+            case 6: 
+                return '6mm'   
+
+            case 7: 
+                return '5mm'
+
+            case 8: 
+                return '4mm'
+
+            case 9: 
+                return '3mm'
+                
+            case 10: 
+                return '2mm'
+
+            case 11: 
+                return '1mm'    
+
+            default:
+                return '14.7mm'
+        }
     }
 
     getRandomLetter = () => {
         return String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 65);
     }
 
-    setStyle = () => {
-        switch (this.state.level) {
-            case 1: {
-                var level = document.getElementById('level'); 
-                level.style = 'levelOne'; 
-            }
-        }
-    }
-
-    handleEndVA = (e) => {
-        var level = this.state.level; 
-        return this.props.handleEnd;
+    handleEndVA = () => { 
+        console.log(this.state.level)
+        this.props.handleAEDataChange(this.state.level);
     }
 
     viewSelect() {
-        switch(this.state.level) {
+
+        const style = {
+            containerStyle: {
+                fontSize: this.state.fontSize
+            }
+        };
+        const { containerStyle } = style;
+        
+        switch(this.state.render) {
                 case 0:
                     return (
                         <div className='flex'>
@@ -70,17 +121,17 @@ class VisualAcuity extends React.Component {
                 case 1:
                     return (
                         <div className='flex'>
-                            <h2>{this.state.letter}</h2>
+                            <h2 style={containerStyle}>{this.state.letter}</h2>
                             <input type="text" id="userCharIn" autoFocus="autoFocus" onKeyPress={this.handleKeyCheck}/>
-                            <button type='button' onClick={this.handleEndVA()}>End Test</button>
+                            <button type='button' onClick={this.handleEndVA}>End Test</button>
                         </div>
                     )
 
         }
     }
     
-    
     render() {
+
         return(
             this.viewSelect()
         )

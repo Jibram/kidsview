@@ -20,7 +20,7 @@ class Test extends React.Component {
     }
 
     componentDidUpdate () {
-        console.log(JSON.stringify(this.state.userData));
+        console.log(JSON.stringify(this.state));
     }
 
     handleNameChange = (e) => {
@@ -41,10 +41,10 @@ class Test extends React.Component {
         this.setState({userData});
     }
 
-    handleAEDataChange = (e) => {
+    handleAEDataChange = (value) => {
         var userData = {...this.state.userData};
-        userData.aeData = 0; /* THIS IS WHERE RAJ NEEDS TO DUMP HIS THINGS */
-        this.setState({userData});
+        userData.aeData = value; /* THIS IS WHERE RAJ NEEDS TO DUMP HIS THINGS */
+        this.setState({userData, ended:true});
     }
 
     handleMEDataChange = (e) => {
@@ -80,7 +80,7 @@ class Test extends React.Component {
             )
         }
         else if (this.state.started) {
-            return <VisualAcuity handleRestart={this.handleRestart} handleEnd={this.handleEnd}/>
+            return <VisualAcuity handleRestart={this.handleRestart} handleEnd={this.handleEnd} handleAEDataChange={this.handleAEDataChange}/>
         }
         else {
             return (
