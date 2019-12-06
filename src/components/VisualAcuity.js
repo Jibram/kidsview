@@ -51,7 +51,7 @@ class VisualAcuity extends React.Component {
     setFontSize = () => {
         switch (this.state.level) {
             case 2: 
-                return '10mm'
+                return '12mm'
 
             case 3: 
                 return '9mm'
@@ -98,34 +98,38 @@ class VisualAcuity extends React.Component {
 
         const style = {
             containerStyle: {
-                fontSize: this.state.fontSize
+                fontSize: this.state.fontSize,
             }
         };
         const { containerStyle } = style;
         
         switch(this.state.render) {
-                case 0:
-                    return (
-                        <div className='flex'>
-                            <img src={logo} alt="Children's valley hospital" height='100%' width='100%'/>
-                            <h1>Visual Acuity Exam</h1>
-                            <p className='info'>
-                            This exam will test your visual accuracy by simulating a Snellen Eye Chart Exam.<br/><br/>
-                            Please sit one foot away from the screen, and have the test proctor type 1 for correct letters.
-                            </p>
-                            <div className='separator'/>
-                            <button type='button' onClick={this.handleStartTest}>Begin Visual Acuity Exam</button>
-                        </div>
-                    )
+            case 0:
+                return (
+                    <div className='flex'>
+                        <img src={logo} alt="Children's valley hospital" height='100%' width='100%'/>
+                        <h1>Visual Acuity Exam</h1>
+                        <p className='info'>
+                        This exam will test your visual accuracy by simulating a Snellen Eye Chart Exam.<br/><br/>
+                        Proctor Instructions: Please turn on the Captial Lock on the keyboard, and when the patient annouces a letter please type that letter in the text box and press 'Enter'.<br/><br/>
+                        Patient Instructions: Please sit 1 metter (an arm's length) away from the screen, and cover one eye with your hand.
+                        </p>
+                        <div className='separator'/>
+                        <button type='button' onClick={this.handleStartTest}>Begin Visual Acuity Exam</button>
+                    </div>
+                )
 
-                case 1:
-                    return (
-                        <div className='flex'>
-                            <h2 style={containerStyle}>{this.state.letter}</h2>
-                            <input type="text" id="userCharIn" autoFocus="autoFocus" onKeyPress={this.handleKeyCheck}/>
-                            <button type='button' onClick={this.handleEndVA}>End Test</button>
+            case 1:
+                return (
+                    <div className='flex'>
+                        <img src={logo} alt="Children's valley hospital" height='100%' width='100%'/>
+                        <div className='VAbox'>
+                            <h1 style={containerStyle}>{this.state.letter}</h1>
                         </div>
-                    )
+                        <input type="text" id="userCharIn" autoFocus="autoFocus" onKeyPress={this.handleKeyCheck}/>
+                        <button type='button' onClick={this.handleEndVA}>End Test</button>
+                    </div>
+                )
 
         }
     }

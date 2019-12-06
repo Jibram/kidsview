@@ -25,16 +25,12 @@
     margin-left: .25em;
 }
 
-.levelOne {
-    font-size: 14.7mm; 
-}
-
-.levelTwo {
-
-}
-
-.round1 {
-    font-size: 160px;
+.VAbox {
+    height: 150px;
+    width: 150px;
+    background-color: bisque;
+    justify-content: center;
+    text-align: center;
 }
 
 button {
