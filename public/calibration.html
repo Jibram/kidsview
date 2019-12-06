@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--
+This is an example HTML that shows how WebGazer can be used on a website.
+This file provides the additional features:
+  * Video feedback regarding face positioning
+  * Improved eye predictions visible to the user
+Instructions on use can be found in the README repository.
+-->
+<html>
+    <head>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+        <TITLE>WebGazer Demo</TITLE>
+        <script async type="text/javascript" src="./webgazer.js"></script>
+    </head>
+
+    <body LANG="en-US" LINK="#0000ff" DIR="LTR">
+      <canvas id="plotting_canvas" width="500" height="500" style="cursor:crosshair;"></canvas>
+      <script src="./main.js"></script>
+    </body>
+
+    <div>  
+      Adjust face position until the green mask is over the face.
+      Then press "Start"
+      <button class="btn btn-primary" type="submit">Start</button>
+
+      When the test is complete, press "Complete Test"
+      <form method="get" action="index.html">
+      <button class="btn btn-primary" type="submit">Complete Test</button>
+    
+    </div>
+</html>
