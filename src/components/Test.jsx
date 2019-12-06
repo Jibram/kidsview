@@ -67,7 +67,10 @@ class Test extends React.Component {
         var c_parent = getCookie("parent");
         var c_phoneNum = getCookie("phoneNum");
         var c_aeData = getCookie("aeData");
-        var c_meData = getCookie("meData");
+        var c_meData = sessionStorage.getItem("meData");
+
+        //used sessionStorage because data was too large. 
+        //var c_meData = getCookie("meData");
 
         var userData = {...this.state.userData};
         userData.meData = c_meData;
@@ -130,7 +133,6 @@ class Test extends React.Component {
         document.cookie="parent=" + state.userData.parent + ";"+ expires + ";path=/;";
         document.cookie="phoneNum=" + state.userData.phoneNum + ";"+ expires + ";path=/;";
         document.cookie="aeData=" + state.userData.aeData + ";"+ expires + ";path=/;";
-        document.cookie="meData=" + state.userData.meData + ";"+ expires + ";path=/;";
         
         //redirect to eye movement test
         window.location.href = ("/calibration.html");
