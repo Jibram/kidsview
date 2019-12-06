@@ -55,6 +55,13 @@ class Test extends React.Component {
                 meData: ``
             }
         }
+        this.url = "http://localhost:5000"
+        this.insertPatient = "/insertpatient?"
+        this.patientName ="patientName="
+        this.parentName = "&parentName="
+        this.phoneNumber = "&phoneNumber="
+        this.aeData = "&aeData="
+        this.meData = "&meData="
     }
 
     //check cookies for completed ME data (eyemovement test)
@@ -87,6 +94,23 @@ class Test extends React.Component {
     
     componentDidUpdate () {
         console.log(JSON.stringify(this.state));
+    }
+
+    handleSaveData = (e) => {
+        var userData = {...this.state.userData};
+        var link;
+        link = this.url.concat(this.insertPatient ,this.patientName, userData.name, this.parentName, userData.parent,this.phoneNumber, userData.phoneNum.toString(10),this.aeData, userData.aeData.toString(10),this.meData, "DUMMYDATA");
+        var xhr = new XMLHttpRequest();
+        var data = null; 
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                data = xhr.response;
+            }
+        };
+
+        xhr.open("GET", link, true);
+        xhr.send(null);
+
     }
 
     handleNameChange = (e) => {
@@ -135,10 +159,29 @@ class Test extends React.Component {
         //redirect to eye movement test
         window.location.href = ("/calibration.html");
 
+        var userData = {...this.state.userData};
+        userData.meData = "superdummydata";
+        this.setState({userData});
+
     }
 
     handleBegin = (e) => {
-        this.setState({started:true}); 
+
+        var name = document.getElementById('nameIn');
+        var parent = document.getElementById('parentIn');
+        var phone = document.getElementById('phoneIn');
+
+        if (name.value != '' &&  parent.value != '' && phone.value != '') {
+            var userData = {...this.state.userData};
+            userData.name = name.value.toString(10);
+            userData.parent = parent.value.toString(10); 
+            userData.phone = phone.value.toString(10);
+            this.setState({userData}); 
+            this.setState({started:true}); 
+        } else {
+            alert('Please enter Name, Parent Name, or Phone Number!');
+        }
+
     }
 
     handleEnd = (e) => {
@@ -159,6 +202,7 @@ class Test extends React.Component {
                     Thank you for using Valley Children's Hospital online visual exam. 
                     </p>
                     <button type='button' onClick={this.handleRestart}>Back to Beginning</button>
+                    <button type='button' onClick={this.handleSaveData}>Save Results</button>
                 </div>
             )
         }
@@ -180,15 +224,15 @@ class Test extends React.Component {
                     <form>
                         <p>
                             <label htmlFor="child">Child's Name:</label>
-                            <input required type="text" name="child" onChange={this.handleNameChange}></input>
+                            <input required type="text" name="child" id="nameIn" onChange={this.handleNameChange}></input>
                         </p>
                         <p>
                             <label htmlFor="parent">Parent's Name:</label>
-                            <input required type="text" name="parent" onChange={this.handleParentChange}></input>
+                            <input required type="text" name="parent" id="parentIn" onChange={this.handleParentChange}></input>
                         </p>
                         <p>
                             <label htmlFor="phone">Phone Number:</label>
-                            <input required type="tel" name="phone" pattern="[0-9]{10}" onChange={this.handlePhoneChange}></input>
+                            <input required type="tel" name="phone" pattern="[0-9]{10}" id="phoneIn" onChange={this.handlePhoneChange}></input>
                         </p>
                     </form>
                     <br/>
