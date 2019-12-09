@@ -47,6 +47,7 @@ class Test extends React.Component {
             AEdone:false,
             MEdone:false,
             ended: false,
+            saved: false,
             userData: {
                 name: ``,
                 parent: ``,
@@ -113,7 +114,7 @@ class Test extends React.Component {
 
         xhr.open("GET", link, true);
         xhr.send(null);
-
+        this.setState({saved:true});
     }
 
     handleNameChange = (e) => {
@@ -197,18 +198,31 @@ class Test extends React.Component {
 
     viewSelect() {
         if (this.state.ended) {
-            return (
-                <div className='flex'>
-                    <img src={logo} alt="Children's valley hospital" height='100%' width='100%'/>
-                    <h1>You have finished your exam</h1>
-                    <p className='info'>
-                    Thank you for using Valley Children's Hospital online visual exam. 
-                    </p>
-                    <button type='button' onClick={this.handleSaveData}>Save Results</button>
-                    <button type='button' onClick={this.handleRestart}>Retake Eye Exam</button>
-                    <button type='button' onClick={this.handleReturn}>Return to Home Page</button>
-                </div>
-            )
+            if (!this.state.saved) {
+                return (
+                    <div className='flex'>
+                        <img src={logo} alt="Children's valley hospital" height='100%' width='100%'/>
+                        <h1>You have finished your exam</h1>
+                        <p className='info'>
+                        If you believe the test results are correct, you may save your results.<br/><br/> 
+                        If you believe errors were made due to factors not related to visual prowess, you may want to retake take the examination.
+                        </p>
+                        <button type='button' onClick={this.handleSaveData}>Save Results</button>
+                        <button type='button' onClick={this.handleRestart}>Retake Eye Exam</button>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className='flex'>
+                        <img src={logo} alt="Children's valley hospital" height='100%' width='100%'/>
+                        <h1>You submited your results to the Doctor</h1>
+                        <p className='info'>
+                        Thank you for using Valley Children's Hospital online visual exam. 
+                        </p>
+                        <button type='button' onClick={this.handleReturn}>Return to Home Page</button>
+                    </div>
+                )
+            }
         }
         else if (this.state.started && !this.state.AEdone) {
             return <VisualAcuity handleRestart={this.handleRestart} handleEnd={this.handleEnd} handleAEDataChange={this.handleAEDataChange}/>
