@@ -9,6 +9,7 @@ Instructions on use can be found in the README repository.
 <html>
     <head>
         <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+        <link rel="stylesheet" href="calibration.css">
         <TITLE>WebGazer Demo</TITLE>
         <script async type="text/javascript" src="./webgazer.js"></script>
     </head>
@@ -18,14 +19,18 @@ Instructions on use can be found in the README repository.
       <script src="./main.js"></script>
     </body>
 
-    <div>  
-      Adjust face position until the green mask is over the face.
-      Then press "Start"
+    <div style="text-align: center;">  
+      <p>
+        Adjust face position until the green mask is over the face.
+        Then press "Start" to begin test.</p>
       <button class="btn btn-primary" type="submit">Start</button>
+    </div>
+    
+    <div style="text-align: center;">
+      <p>When the test is complete, press "Complete Test"</p>
 
-      When the test is complete, press "Complete Test"
       <form method="get" action="index.html">
-      <button class="btn btn-primary" type="submit">Complete Test</button>
+      <button class="button" type="submit">Complete Test</button>
     
     </div>
 </html>
