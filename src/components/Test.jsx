@@ -49,6 +49,7 @@ class Test extends React.Component {
             ended: false,
             saved: false,
             userData: {
+                id:0,
                 name: ``,
                 parent: ``,
                 phoneNum: 0,
@@ -105,16 +106,17 @@ class Test extends React.Component {
         var link;
         link = this.url.concat(this.insertPatient ,this.patientName, userData.name, this.parentName, userData.parent,this.phoneNumber, userData.phoneNum.toString(10),this.aeData, userData.aeData.toString(10),this.meData, userData.meData);
         var xhr = new XMLHttpRequest();
-        var data = null; 
+        //var data = null; 
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                data = xhr.response;
+                userData.id = xhr.response;
             }
         };
 
-        xhr.open("GET", link, true);
+        xhr.open("GET", link, false);
         xhr.send(null);
-        this.setState({saved:true});
+        this.setState({saved:true, userData});
+        
     }
 
     handleNameChange = (e) => {
@@ -217,7 +219,8 @@ class Test extends React.Component {
                         <img src={logo} alt="Children's valley hospital" height='100%' width='100%'/>
                         <h1>You submited your results to the Doctor</h1>
                         <p className='info'>
-                        Thank you for using Valley Children's Hospital online visual exam. 
+                        Thank you for using Valley Children's Hospital online visual exam.<br/><br/>
+                        Please save your Patient ID: {this.state.userData.id}
                         </p>
                         <button type='button' onClick={this.handleReturn}>Return to Home Page</button>
                     </div>
