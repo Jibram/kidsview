@@ -102,7 +102,7 @@ class Test extends React.Component {
     handleSaveData = (e) => {
         var userData = {...this.state.userData};
         var link;
-        link = this.url.concat(this.insertPatient ,this.patientName, userData.name, this.parentName, userData.parent,this.phoneNumber, userData.phoneNum.toString(10),this.aeData, userData.aeData.toString(10),this.meData, "DUMMYDATA");
+        link = this.url.concat(this.insertPatient ,this.patientName, userData.name, this.parentName, userData.parent,this.phoneNumber, userData.phoneNum.toString(10),this.aeData, userData.aeData.toString(10),this.meData, userData.meData);
         var xhr = new XMLHttpRequest();
         var data = null; 
         xhr.onreadystatechange = function () {
@@ -161,9 +161,6 @@ class Test extends React.Component {
         //redirect to eye movement test
         window.location.href = ("/calibration.html");
 
-        var userData = {...this.state.userData};
-        userData.meData = "superdummydata";
-        this.setState({userData});
 
     }
 
@@ -194,6 +191,10 @@ class Test extends React.Component {
         this.setState({started:false, ended:false, AEdone:false, MEdone:false})
     }
 
+    handleReturn = (e) => {
+        this.props.handleReturn();
+    }
+
     viewSelect() {
         if (this.state.ended) {
             return (
@@ -203,8 +204,9 @@ class Test extends React.Component {
                     <p className='info'>
                     Thank you for using Valley Children's Hospital online visual exam. 
                     </p>
-                    <button type='button' onClick={this.handleRestart}>Back to Beginning</button>
                     <button type='button' onClick={this.handleSaveData}>Save Results</button>
+                    <button type='button' onClick={this.handleRestart}>Retake Eye Exam</button>
+                    <button type='button' onClick={this.handleReturn}>Return to Home Page</button>
                 </div>
             )
         }

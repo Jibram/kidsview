@@ -4,7 +4,6 @@ import './LandingPage.css'
 
 class LandingPage extends React.Component {
 
-
     render() {
         return(
             <div className='flex'>

@@ -44,12 +44,16 @@ class App extends React.Component {
     this.setState({patient:false,doctor:true})
   }
 
+  handleReturn = (e) => {
+    this.setState({patient:false,doctor:false})
+  }
+
   viewSelect() {
     if (this.state.patient) {
-      return <Test/>
+      return <Test handleReturn={this.handleReturn}/>
     }
     else if (this.state.doctor) {
-      return <AdminPage/>
+      return <AdminPage handleReturn={this.handleReturn}/>
     }
     else {
       return <LandingPage handlePatient={this.handlePatient} handleDoctor={this.handleDoctor}/>

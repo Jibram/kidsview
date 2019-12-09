@@ -14,6 +14,7 @@ class AdminPage extends React.Component {
                 id: 0,
                 name: '',
                 parentName: '',
+                phoneNumber: '',
                 aeData: 0,
                 meData: ''
             }
@@ -96,8 +97,9 @@ class AdminPage extends React.Component {
             patientInfo.id = data[0];
             patientInfo.name = data[1];
             patientInfo.parentName = data[2];
-            patientInfo.aeData = data[3];
-            patientInfo.meData = data[4];
+            patientInfo.phoneNumber = data[3]
+            patientInfo.aeData = data[4];
+            patientInfo.meData = data[5];
             this.setState({patientInfo});
             this.setState({viewData:true});
         } else {
@@ -110,6 +112,10 @@ class AdminPage extends React.Component {
         this.setState({viewData:false});
     }
 
+    handleReturn = (e) => {
+        this.props.handleReturn();
+    }
+
     viewSelect() {
         if (this.state.viewData) {
             return (
@@ -120,10 +126,12 @@ class AdminPage extends React.Component {
                         Patient ID: {this.state.patientInfo.id}<br/><br/>
                         Patient Name: {this.state.patientInfo.name}<br/><br/>
                         Parent Name: {this.state.patientInfo.parentName}<br/><br/>
+                        Phone Number: {this.state.patientInfo.phoneNumber}<br/><br/>
                         AE Data: {this.state.patientInfo.aeData}<br/><br/>
                         ME Data: {this.state.patientInfo.meData}<br/><br/>
                     </p>
                     <button type='button' onClick={this.handleSearch}>View other patient</button>
+                    <button type='button' onClick={this.handleReturn}>Return to Home Page</button>
                 </div>
             )
         }
