@@ -1,7 +1,10 @@
 import React from 'react'
 import logo from './assets/logo.png'
+import megraphy from './assets/lyry.png'
+import megraphx from './assets/lxrx.png'
 import './AdminPage.css'
 import { callbackify } from 'util'
+
 
 class AdminPage extends React.Component {
     constructor(props){
@@ -128,7 +131,10 @@ class AdminPage extends React.Component {
                         Parent Name: {this.state.patientInfo.parentName}<br/><br/>
                         Phone Number: {this.state.patientInfo.phoneNumber}<br/><br/>
                         AE Data: {this.state.patientInfo.aeData}<br/><br/>
-                        ME Data: {this.state.patientInfo.meData}<br/><br/>
+                        {/* ME Data: {this.state.patientInfo.meData}<br/><br/> */}
+                        <img src={megraphx} alt="left-eye-x" height='100%' width='100%'/>
+                        <img src={megraphy} alt="left-eye-y" height='100%' width='100%'/>
+
                     </p>
                     <button type='button' onClick={this.handleSearch}>View other patient</button>
                     <button type='button' onClick={this.handleReturn}>Return to Home Page</button>
